@@ -7,7 +7,7 @@ PORT = 50000
 sock = socket(AF_INET, SOCK_DGRAM)
 
 #Cliente escolhe um nome que esteja dentro da matriz de endereço
-message = input("Digite um nome:")
+message = input("Digite um nome: ")
 
 #Envia pro DNS
 sock.sendto(message.encode(), (HOST, PORT))
@@ -18,6 +18,10 @@ response, addr = sock.recvfrom(1024)
 
 sockServer = (response, 8000)
 
-sock.sendto("TESTE".encode(), sockServer)
+try:
+    msg = input("Digite a mensagem: ")
+    sock.sendto(msg.encode(), sockServer)
+except:
+    print("O nome não existe no DNS!")
 
-print(response, addr)
+print(response)
